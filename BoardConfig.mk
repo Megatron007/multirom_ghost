@@ -55,6 +55,7 @@ BOARD_KERNEL_BASE := 0x80200000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02200000 --dt $(LOCAL_PATH)/dt.img
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 12884901888
+BOARD_CUSTOM_BOOTIMG_MK := device/motorola/moto_msm8960dt/custombootimg.mk
 
 WLAN_MODULES:
 	mkdir -p $(KERNEL_MODULES_OUT)/prima
@@ -88,12 +89,27 @@ TARGET_OTA_ASSERT_DEVICE := xt1030,obakem_verizon,xt1053,ghost_retail,xt1055,gho
 
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB := device/motorola/moto_msm8960dt/rootdir/etc/twrp.fstab
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 BOARD_RECOVERY_SWIPE := true
 
 # TWRP
 DEVICE_RESOLUTION := 720x1280
+TW_INTERNAL_STORAGE_PATH := "/data/media"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TW_INCLUDE_CRYPTO := true
 TW_BRIGHTNESS_PATH := /sys/class/backlight/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 126
+
+
+# MultiROM
+MR_INPUT_TYPE := type_b
+MR_INIT_DEVICES := device/motorola/moto_msm8960dt/mr_init_devices.c
+MR_DPI := hdpi
+MR_DPI_FONT := 216
+MR_FSTAB := device/motorola/moto_msm8960dt/rootdir/etc/twrp.fstab
+MR_KEXEC_MEM_MIN := 0x25000000
+MR_KEXEC_DTB := true
+MR_CONTINUOUS_FB_UPDATE := true
